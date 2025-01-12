@@ -1,8 +1,8 @@
 # Posyandu Desa Marga Agung
 
-Posyandu merupakan salah satu pelayanan kesehatan yang penting bagi masyarakat, terutama untuk ibu hamil hingga lanjut usia. Namun, Posyandu Marga Agung menghadapi permasalahan dalam pengelolaan jadwal operasional, serta pendataan pasien masih menggunakan metode konvensional. Hal ini menyulitkan dalam mengakses berkas dan meningkatkan risiko kehilangan atau kerusakan dokumen. Oleh karena itu, proposal ini bertujuan untuk mengembangkan website Posyandu Desa Marga Agung dengan fungsi utama memberikan update informasi terkait status operasional posyandu dan pengelolaan data pasien.
- 
-Pengembangan website ini menggunakan metode Waterfall yang meliputi tahap analisis kebutuhan, desain, pengembangan, pengujian, dan pemeliharaan. Metode Waterfall dipilih karena memiliki alur kerja sistem yang terstruktur dan terukur. Setiap tim memiliki tugas dan tanggung jawab sesuai keahlian masing-masing. Selain itu, pekerjaan dapat diselesaikan sesuai alokasi waktu yang telah ditentukan. Dengan adanya website ini, diharapkan dapat meningkatkan efisiensi pengelolaan data dan mempermudah akses informasi terkait status operasional Posyandu Desa Marga Agung.
+Posyandu merupakan salah satu pelayanan kesehatan yang penting bagi masyarakat, terutama untuk ibu hamil hingga lanjut usia. Namun, Posyandu Wonosobo menghadapi permasalahan dalam pengelolaan pendataan pasien masih menggunakan metode konvensional. Hal ini menyulitkan dalam mengakses berkas dan meningkatkan risiko kehilangan atau kerusakan dokumen. Oleh karena itu, proposal ini bertujuan untuk mengembangkan website Posyandu Wonosobo dengan fungsi utama memberikan update informasi terkait status operasional posyandu dan pengelolaan data pasien.
+
+Pengembangan website ini menggunakan metode Waterfall yang meliputi tahap analisis kebutuhan, desain, pengembangan, pengujian, dan pemeliharaan. Metode Waterfall dipilih karena memiliki alur kerja sistem yang terstruktur dan terukur. Selain itu, pekerjaan dapat diselesaikan sesuai alokasi waktu yang telah ditentukan. Dengan adanya website ini, diharapkan dapat meningkatkan efisiensi pengelolaan data dan mempermudah akses informasi terkait status operasional Posyandu Desa Marga Agung.
 
 # Dependensi paket (library)
 
@@ -23,6 +23,7 @@ Pengembangan website ini menggunakan metode Waterfall yang meliputi tahap analis
    - react-dom: Library untuk memanipulasi elemen DOM di aplikasi React.
    - tailwind-merge: Digunakan untuk menggabungkan kelas Tailwind CSS tanpa duplikasi.
    - tailwindcss-animate: Plugin animasi untuk Tailwind CSS.
+
 - zod: Library untuk validasi skema data.
 
 2. DevDependencies (untuk pengembangan)  
@@ -40,23 +41,10 @@ Pengembangan website ini menggunakan metode Waterfall yang meliputi tahap analis
    - tailwindcss: Kerangka kerja CSS utilitas untuk membuat desain antarmuka responsif.
    - typescript: Bahasa pemrograman berbasis JavaScript yang menambahkan tipe statis untuk pengembangan yang lebih aman.
 
-# Cara menjalankan aplikasi 
+# Cara menjalankan aplikasi
 
 - [Teks]
 
 # Diagram ERD
 
 - [Gambar]
-
-# Kontributor pengembangan website
-
-| Nama                          | Role                   |
-|-------------------------------|------------------------|
-| Muhammad Yusuf                | Project Manager + FullStack |
-| Abu Bakar Siddiq Siregar      | UI/UX Designer         |
-| Nydia Renli Sinaga            | Front-End              |
-| Rayhan Fatih Gunawan          | Front-End              |
-| Rustian Afencius Marbun       | Back-End               |
-| Dwi Arthur Revangga           | Back-End               |
-| Nashwa Putri Laisya           | UI/UX Designer         |
-| Elsa Elisa Yohana Sianturi    | UI/UX Designer         |
