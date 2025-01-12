@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Warga {
+  id            String          @id @default(uuid())
+  nama          String
+  nik           String          @unique
+  tanggalLahir  DateTime
+  umur          Int
+  LayananLansia LayananLansia[] // Relasi dengan LayananLansia
+  LayananAnak   LayananAnak[]   @relation("Ibu") // Relasi untuk ibu
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model LayananLansia {
+  id           String   @id @default(uuid())
+  wargaId      String
+  warga        Warga    @relation(fields: [wargaId], references: [id])
+  nama         String
+  nik          String
+  ttl          String
+  beratBadan   Float? // Optional
+  tinggiBadan  Float? // Optional
+  tensiDarah   String? // Optional
+  lingkarPerut Float? // Optional
+  keterangan   String? // Optional
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model LayananAnak {
+  id                 String       @id @default(uuid())
+  anakId             String
+  jenisKelaminAnak   JenisKelamin
+  tinggiBadanAnak    Float? // Optional
+  beratBadanAnak     Float? // Optional
+  umurAnak           Float? // Optional
+  lingkarLenganAnak  Float? // Optional
+  lingkarKepalaAnak  Float? // Optional
+  tinggiBadanIbu     Float? // Optional
+  beratBadanIbu      Float? // Optional
+  lingkarLenganIbu   Float? // Optional
+  lingkarPinggangIbu Float? // Optional
+  alatKontrasepsi    String? // Optional
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  Warga Warga[] @relation("Ibu")
+}
+
+enum JenisKelamin {
+  LAKI_LAKI
+  PEREMPUAN
+}
+
+model blog {
+  id           String         @id @default(uuid())
+  createdAt    DateTime       @default(now())
+  title        String
+  image_url    String
+  is_premium   Boolean        @default(false)
+  is_published Boolean        @default(true)
+  blog_content blog_content[]
+}
+
+model blog_content {
+  blog_id   String   @id @default(uuid())
+  blog      blog     @relation(fields: [blog_id], references: [id])
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model JadwalPosyandu {
+  id        String   @id @default(uuid())
+  namaAcara String
+  tanggal   DateTime
+  jam       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
