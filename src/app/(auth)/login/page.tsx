@@ -67,7 +67,7 @@ export default function LoginPage() {
               <br />
               Admin & Kader Posyandu
               <br />
-              Desa Marga Agung
+              Pekon Wonosobo
             </h1>
 
             <div className="mt-10 flex flex-col items-start justify-center gap-1">
