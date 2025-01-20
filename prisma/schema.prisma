@@ -10,86 +10,67 @@ datasource db {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model LayananLansia {
-  id           String   @id @default(uuid())
-  wargaId      String
-  beratBadan   Float?
-  tinggiBadan  Float?
-  asamUrat     Float?
-  gulaDarah    Float?
-  keterangan   String?
-  kolesterol   Float?
-  lingkarPerut Float?
-  tensiDarah   String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  warga        Warga    @relation(fields: [wargaId], references: [id])
+  id            String    @id @default(uuid())
+  wargaId       String?
+  beratBadan    Float?
+  tinggiBadan   Float?
+  lingkarPerut  Float?
+  lingkarLengan Float?
+  tensiDarah    Float?
+  created_at    DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime? @updatedAt @db.Timestamp(6)
+  warga         warga?    @relation(fields: [wargaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@ignore
 }
 
 model blog {
   id           String        @id @default(uuid())
-  createdAt    DateTime      @default(now())
-  title        String
-  image_url    String
-  is_premium   Boolean       @default(false)
-  is_published Boolean       @default(true)
+  created_at   DateTime      @default(now()) @db.Timestamptz(6)
+  title        String?
+  image_url    String?
+  is_premium   Boolean?
+  is_published Boolean?
   blog_content blog_content?
 }
 
 model blog_content {
-  blog_id   String   @id @default(uuid())
-  content   String
-  createdAt DateTime @default(now())
-  blog      blog     @relation(fields: [blog_id], references: [id])
+  blog_id    String   @id @default(uuid())
+  content    String?
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  blog       blog     @relation(fields: [blog_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model JadwalPosyandu {
-  id        String   @id @default(uuid())
-  namaAcara String
-  tanggal   DateTime
-  jam       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String    @id @default(uuid())
+  namaAcara  String?
+  tanggal    DateTime? @db.Date
+  jam        String?
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt  DateTime? @updatedAt @db.Timestamp(6)
 }
 
-model LayananIbuAnak {
-  id                                 String       @id
-  tinggiBadanAnak                    Float?
-  beratBadanAnak                     Float?
-  umurAnak                           Float?
-  lingkarLenganAnak                  Float?
-  lingkarKepalaAnak                  Float?
-  tinggiBadanIbu                     Float?
-  beratBadanIbu                      Float?
-  lingkarLenganIbu                   Float?
-  lingkarPinggangIbu                 Float?
-  alatKontrasepsi                    String?
-  anakId                             String
-  ayahId                             String
-  ibuId                              String
-  jenisKelaminAnak                   JenisKelamin
-  createdAt                          DateTime     @default(now())
-  updatedAt                          DateTime
-  Warga_LayananIbuAnak_anakIdToWarga Warga        @relation("LayananIbuAnak_anakIdToWarga", fields: [anakId], references: [id])
-  Warga_LayananIbuAnak_ayahIdToWarga Warga        @relation("LayananIbuAnak_ayahIdToWarga", fields: [ayahId], references: [id])
-  Warga_LayananIbuAnak_ibuIdToWarga  Warga        @relation("LayananIbuAnak_ibuIdToWarga", fields: [ibuId], references: [id])
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model LayananAnak {
+  id                 String    @id
+  tinggiBadanAnak    Float?
+  beratBadanAnak     Float?
+  lingkarLenganAnak  Float?
+  lingkarKepalaaAnak Float?
+  created_at         DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt          DateTime? @db.Timestamp(6)
+  anakId             String?
+  warga              warga?    @relation(fields: [anakId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model Warga {
-  id                                          String           @id
-  nama                                        String
-  nik                                         String           @unique
-  tanggalLahir                                DateTime
-  umur                                        Int
-  createdAt                                   DateTime         @default(now())
-  updatedAt                                   DateTime
-  dusun                                       String?
-  LayananIbuAnak_LayananIbuAnak_anakIdToWarga LayananIbuAnak[] @relation("LayananIbuAnak_anakIdToWarga")
-  LayananIbuAnak_LayananIbuAnak_ayahIdToWarga LayananIbuAnak[] @relation("LayananIbuAnak_ayahIdToWarga")
-  LayananIbuAnak_LayananIbuAnak_ibuIdToWarga  LayananIbuAnak[] @relation("LayananIbuAnak_ibuIdToWarga")
-  LayananLansia                               LayananLansia[]
-}
-
-enum JenisKelamin {
-  LAKI_LAKI
-  PEREMPUAN
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model warga {
+  id            String          @id
+  nama          String?
+  nik           String?
+  tanggalLahir  DateTime?       @db.Timestamp(6)
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime?       @db.Timestamp(6)
+  LayananAnak   LayananAnak[]
+  LayananLansia LayananLansia[]
 }
