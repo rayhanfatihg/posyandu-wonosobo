@@ -84,15 +84,7 @@ export default function LayananAnakForm() {
   const form = useForm<LayananFormValues>({
     resolver: zodResolver(layananSchema),
     defaultValues: {
-      ibuId: "",
-      ayahId: "",
       anakId: "",
-      jenisKelaminAnak: "LAKI_LAKI",
-      tinggiBadanIbu: 0,
-      beratBadanIbu: 0,
-      lingkarLenganIbu: 0,
-      lingkarPinggangIbu: 0,
-      alatKontrasepsi: "",
       tinggiBadanAnak: 0,
       beratBadanAnak: 0,
       umurAnak: 0,
@@ -228,6 +220,27 @@ export default function LayananAnakForm() {
               </FormControl>
               <FormMessage>
                 {form.formState.errors.lingkarLenganAnak?.message}
+              </FormMessage>
+            </FormItem>
+          )}
+        />
+
+        {/* Lingkar Kepala Anak/Balita */}
+        <FormField
+          control={form.control}
+          name="lingkarLenganAnak"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <Label>Lingkar Kepala Anak/Balita (cm)</Label>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="Masukkan Lingkar Lengan Anak/Balita"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage>
+                {form.formState.errors.lingkarKepalaAnak?.message}
               </FormMessage>
             </FormItem>
           )}

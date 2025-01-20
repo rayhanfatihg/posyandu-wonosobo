@@ -20,8 +20,6 @@ model LayananLansia {
   created_at    DateTime  @default(now()) @db.Timestamptz(6)
   updatedAt     DateTime? @updatedAt @db.Timestamp(6)
   warga         warga?    @relation(fields: [wargaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@ignore
 }
 
 model blog {
@@ -52,23 +50,23 @@ model JadwalPosyandu {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model LayananAnak {
-  id                 String    @id
-  tinggiBadanAnak    Float?
-  beratBadanAnak     Float?
-  lingkarLenganAnak  Float?
-  lingkarKepalaaAnak Float?
-  created_at         DateTime  @default(now()) @db.Timestamptz(6)
-  updatedAt          DateTime? @db.Timestamp(6)
-  anakId             String?
-  warga              warga?    @relation(fields: [anakId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id                String    @id
+  tinggiBadanAnak   Float?
+  beratBadanAnak    Float?
+  lingkarLenganAnak Float?
+  lingkarKepalaAnak Float?
+  created_at        DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime? @db.Timestamp(6)
+  anakId            String?
+  warga             warga?    @relation(fields: [anakId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model warga {
   id            String          @id
-  nama          String?
-  nik           String?
-  tanggalLahir  DateTime?       @db.Timestamp(6)
+  nama          String
+  nik           String
+  tanggalLahir  DateTime        @db.Timestamp(6)
   created_at    DateTime        @default(now()) @db.Timestamptz(6)
   updatedAt     DateTime?       @db.Timestamp(6)
   LayananAnak   LayananAnak[]
