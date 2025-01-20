@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-import LayananIbuAnak from "./components/layanan-ibu-anak/LayananIbuAnak"
+import LayananIbuAnak from "./components/layanan-anak/LayananAnak"
 import LayananLansiaForm from "./components/layanan-lansia/LayananLansia"
 
 function Skeleton() {

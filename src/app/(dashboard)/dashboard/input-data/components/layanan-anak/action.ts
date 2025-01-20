@@ -5,7 +5,7 @@ import { JenisKelamin } from "@prisma/client"
 
 import db from "@/lib/db"
 
-export async function saveDataLayananIbuAnak(data: {
+export async function saveDataLayananAnak(data: {
   ibuId: string
   ayahId: string
   anakId: string
@@ -52,21 +52,12 @@ export async function saveDataLayananIbuAnak(data: {
       }
     }
 
-    // Menyimpan data layanan ibu-anak
-    await db.layananIbuAnak.create({
+    // Menyimpan data layanan anak
+    await db.LayananAnak.create({
       data: {
-        ibuId: data.ibuId,
-        ayahId: data.ayahId,
         anakId: data.anakId,
-        tinggiBadanIbu: data.tinggiBadanIbu,
-        beratBadanIbu: data.beratBadanIbu,
-        lingkarLenganIbu: data.lingkarLenganIbu,
-        lingkarPinggangIbu: data.lingkarPinggangIbu,
-        alatKontrasepsi: data.alatKontrasepsi,
-        jenisKelaminAnak: data.jenisKelaminAnak, // Correct field name
         tinggiBadanAnak: data.tinggiBadanAnak,
         beratBadanAnak: data.beratBadanAnak,
-        umurAnak: data.umurAnak,
         lingkarLenganAnak: data.lingkarLenganAnak,
         lingkarKepalaAnak: data.lingkarKepalaAnak,
       },

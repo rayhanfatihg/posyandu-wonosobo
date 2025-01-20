@@ -26,7 +26,7 @@ import {
 
 import { getAllDataWarga } from "../../data-warga/action"
 import { ComboboxWarga } from "../ComboboxWarga"
-import { saveDataLayananIbuAnak } from "./action"
+import { saveDataLayananAnak } from "./action"
 
 const layananSchema = z.object({
   ibuId: z.string().min(1, { message: "Ibu ID wajib diisi" }),
@@ -78,7 +78,7 @@ const layananSchema = z.object({
 
 type LayananFormValues = z.infer<typeof layananSchema>
 
-export default function LayananIbuAnakForm() {
+export default function LayananAnakForm() {
   const { toast } = useToast()
 
   const form = useForm<LayananFormValues>({
@@ -102,12 +102,12 @@ export default function LayananIbuAnakForm() {
   })
 
   const onSubmit = async (data: LayananFormValues) => {
-    const result = await saveDataLayananIbuAnak(data)
+    const result = await saveDataLayananAnak(data)
 
     if (result.success) {
       toast({
         title: "Data berhasil disimpan!",
-        description: "Data layanan ibu-anak berhasil disimpan",
+        description: "Data layanan anak berhasil disimpan",
       })
       form.reset()
     } else {
@@ -150,130 +150,6 @@ export default function LayananIbuAnakForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mt-10 flex w-[310px] flex-col space-y-2 rounded-md sm:w-[400px]"
       >
-        {/* Pilih Nama Ibu */}
-        <FormField
-          control={form.control}
-          name="ibuId"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Label>Pilih Nama Ibu</Label>
-              <FormControl>
-                <ComboboxWarga
-                  options={wargaOptions}
-                  value={field.value}
-                  onChange={(value) => field.onChange(value)}
-                  placeholder="Pilih nama ibu..."
-                />
-              </FormControl>
-              <FormMessage>{form.formState.errors.ibuId?.message}</FormMessage>
-            </FormItem>
-          )}
-        />
-
-        {/* Tinggi Badan Ibu */}
-        <FormField
-          control={form.control}
-          name="tinggiBadanIbu"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Label>Tinggi Badan Ibu (cm)</Label>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Masukkan Tinggi Badan Ibu"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage>
-                {form.formState.errors.tinggiBadanIbu?.message}
-              </FormMessage>
-            </FormItem>
-          )}
-        />
-
-        {/* Berat Badan Ibu */}
-        <FormField
-          control={form.control}
-          name="beratBadanIbu"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Label>Berat Badan Ibu (kg)</Label>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Masukkan Berat Badan Ibu"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage>
-                {form.formState.errors.beratBadanIbu?.message}
-              </FormMessage>
-            </FormItem>
-          )}
-        />
-
-        {/* Lingkar Lengan Ibu */}
-        <FormField
-          control={form.control}
-          name="lingkarLenganIbu"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Label>Lingkar Lengan Ibu (cm)</Label>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Masukkan Lingkar Lengan Ibu"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage>
-                {form.formState.errors.lingkarLenganIbu?.message}
-              </FormMessage>
-            </FormItem>
-          )}
-        />
-
-        {/* Lingkar Pinggang Ibu */}
-        <FormField
-          control={form.control}
-          name="lingkarPinggangIbu"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Label>Lingkar Pinggang Ibu (cm)</Label>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Masukkan Lingkar Pinggang Ibu"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage>
-                {form.formState.errors.lingkarPinggangIbu?.message}
-              </FormMessage>
-            </FormItem>
-          )}
-        />
-
-        {/* Pilih Nama Ayah */}
-        <FormField
-          control={form.control}
-          name="ayahId"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Label>Pilih Nama Ayah</Label>
-              <FormControl>
-                <ComboboxWarga
-                  options={wargaOptions}
-                  value={field.value}
-                  onChange={(value) => field.onChange(value)}
-                  placeholder="Pilih nama ayah..."
-                />
-              </FormControl>
-              <FormMessage>{form.formState.errors.ayahId?.message}</FormMessage>
-            </FormItem>
-          )}
-        />
-
         {/* Pilih Nama Anak/Balita */}
         <FormField
           control={form.control}
@@ -290,34 +166,6 @@ export default function LayananIbuAnakForm() {
                 />
               </FormControl>
               <FormMessage>{form.formState.errors.anakId?.message}</FormMessage>
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="jenisKelaminAnak"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Label>Jenis Kelamin Anak</Label>
-              <FormControl>
-                <Select
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  defaultValue="LAKI_LAKI"
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Pilih jenis kelamin" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="LAKI_LAKI">Laki-laki</SelectItem>
-                    <SelectItem value="PEREMPUAN">Perempuan</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage>
-                {form.formState.errors.jenisKelaminAnak?.message}
-              </FormMessage>
             </FormItem>
           )}
         />
@@ -380,34 +228,6 @@ export default function LayananIbuAnakForm() {
               </FormControl>
               <FormMessage>
                 {form.formState.errors.lingkarLenganAnak?.message}
-              </FormMessage>
-            </FormItem>
-          )}
-        />
-
-        {/* Alat Kontrasepsi */}
-        <FormField
-          control={form.control}
-          name="alatKontrasepsi"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Label>Alat Kontrasepsi</Label>
-              <FormControl>
-                <Select
-                  value={field.value}
-                  onValueChange={(value) => field.onChange(value)}
-                >
-                  <SelectTrigger className="border border-primary">
-                    <SelectValue placeholder="Pilih alat kontrasepsi" />
-                  </SelectTrigger>
-                  <SelectContent className="border border-primary">
-                    <SelectItem value="SUNTIK">Suntik</SelectItem>
-                    <SelectItem value="IMPLAN">Implan</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage>
-                {form.formState.errors.alatKontrasepsi?.message}
               </FormMessage>
             </FormItem>
           )}
