@@ -158,32 +158,6 @@ export default function InputDataWarga() {
             )}
           />
 
-          {/* Dusun Field */}
-          <FormField
-            control={form.control}
-            name="dusun"
-            render={({ field }) => (
-              <FormItem>
-                <Label htmlFor="dusun">Dusun</Label>
-                <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger id="dusun">
-                      <SelectValue placeholder="Pilih dusun" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Dusun A">Dusun A</SelectItem>
-                      <SelectItem value="Dusun B">Dusun B</SelectItem>
-                      <SelectItem value="Dusun C">Dusun C</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage>
-                  {form.formState.errors.dusun?.message}
-                </FormMessage>
-              </FormItem>
-            )}
-          />
-
           <div className="flex w-full">
             <Button
               type="submit"

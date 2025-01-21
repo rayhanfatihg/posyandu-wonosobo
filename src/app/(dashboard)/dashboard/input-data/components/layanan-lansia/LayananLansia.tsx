@@ -63,10 +63,6 @@ export default function LayananLansiaForm() {
       tinggiBadan: undefined,
       tensiDarah: "",
       lingkarPerut: undefined,
-      kolesterol: undefined,
-      gulaDarah: undefined,
-      asamUrat: undefined,
-      keterangan: "",
     },
   })
 
@@ -135,30 +131,6 @@ export default function LayananLansiaForm() {
       type: "number",
       placeholder: "Masukkan Lingkar Perut",
     },
-    {
-      name: "kolesterol",
-      label: "Kolesterol",
-      type: "number",
-      placeholder: "Masukkan Kolesterol",
-    },
-    {
-      name: "gulaDarah",
-      label: "Gula Darah",
-      type: "number",
-      placeholder: "Masukkan Gula Darah",
-    },
-    {
-      name: "asamUrat",
-      label: "Asam Urat",
-      type: "number",
-      placeholder: "Masukkan Asam Urat",
-    },
-    {
-      name: "keterangan",
-      label: "Keterangan",
-      type: "text",
-      placeholder: "Masukkan Keterangan",
-    },
   ]
 
   return (
@@ -189,35 +161,47 @@ export default function LayananLansiaForm() {
           )}
         />
 
-        {/* Other Fields */}
-        {fields.map(({ name, label, type, placeholder }) => (
-          <FormField
-            key={name}
-            control={form.control}
-            name={name}
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <Label>{label}</Label>
+        {/* Berat Badan */}
+        <FormField
+          control={form.control}
+          name="beratBadan"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <Label>Berat Badan (kg)</Label>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="Masukkan Berat Badan "
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage>
+                {form.formState.errors.beratBadan?.message}
+              </FormMessage>
+            </FormItem>
+          )}
+        />
 
-                <FormControl>
-                  {name === "keterangan" ? (
-                    <Textarea
-                      placeholder={placeholder}
-                      {...field}
-                      className="max-h-[100px]"
-                    />
-                  ) : (
-                    <Input type={type} placeholder={placeholder} {...field} />
-                  )}
-                </FormControl>
-
-                <FormMessage>
-                  {form.formState.errors[name]?.message}
-                </FormMessage>
-              </FormItem>
-            )}
-          />
-        ))}
+        {/* Berat Badan */}
+        <FormField
+          control={form.control}
+          name="tinggiBadan"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <Label>Tinggi Badan (kg)</Label>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="Masukkan tinggi Badan "
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage>
+                {form.formState.errors.beratBadan?.message}
+              </FormMessage>
+            </FormItem>
+          )}
+        />
 
         <Button type="submit" className="w-full">
           Simpan Data

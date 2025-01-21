@@ -9,14 +9,10 @@ export async function saveDataWarga({
   nama,
   nik,
   tanggalLahir,
-  umur,
-  dusun,
 }: {
   nama: string
   nik: string
   tanggalLahir: Date
-  umur: number
-  dusun?: string
 }) {
   try {
     // Periksa apakah NIK sudah ada di database
@@ -34,8 +30,6 @@ export async function saveDataWarga({
         nama,
         nik,
         tanggalLahir,
-        umur,
-        dusun,
       },
     })
 
@@ -53,9 +47,7 @@ export async function getAllDataWarga() {
     const wargaList = await db.warga.findMany({
       include: {
         LayananLansia: true,
-        LayananIbuAnakAnak: true,
-        LayananIbuAnakIbu: true,
-        LayananIbuAnakAyah: true,
+        LayananAnak: true,
       },
     })
 
