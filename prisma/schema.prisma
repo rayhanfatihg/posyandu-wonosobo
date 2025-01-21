@@ -10,16 +10,16 @@ datasource db {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model LayananLansia {
-  id            String    @id @default(uuid())
-  wargaId       String?
+  id            String   @id @default(uuid())
+  wargaId       String
   beratBadan    Float?
   tinggiBadan   Float?
   lingkarPerut  Float?
   lingkarLengan Float?
-  tensiDarah    Float?
-  created_at    DateTime  @default(now()) @db.Timestamptz(6)
-  updatedAt     DateTime? @updatedAt @db.Timestamp(6)
-  warga         warga?    @relation(fields: [wargaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  tensiDarah    String?
+  created_at    DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime @updatedAt @db.Timestamp(6)
+  warga         warga    @relation(fields: [wargaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model blog {
